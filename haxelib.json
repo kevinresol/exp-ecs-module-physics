@@ -1,0 +1,14 @@
+{
+	"name": "exp-ecs-module-physics",
+	"license": "MIT",
+	"tags": [],
+	"classPath": "src",
+	"contributors": ["kevinresol"],
+	"releasenote": "initial release",
+	"version": "0.0.0",
+	"dependencies": {
+		"exp-ecs": "",
+		"exp-ecs-module-transform": "",
+		"exp-ecs-module-geometry": ""
+	}
+}
