@@ -9,6 +9,7 @@
 	"dependencies": {
 		"exp-ecs": "",
 		"exp-ecs-module-transform": "",
-		"exp-ecs-module-geometry": ""
+		"exp-ecs-module-geometry": "",
+		"exp-spatial": ""
 	}
 }
