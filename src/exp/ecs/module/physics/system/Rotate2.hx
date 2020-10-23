@@ -13,10 +13,15 @@ private typedef Components = {
  */
 @:nullSafety(Off)
 class Rotate2 extends System {
+	final list:NodeList<Components>;
 	var nodes:Array<Node<Components>>;
 
-	public function new(nodes:NodeList<Components>) {
-		nodes.bind(v -> this.nodes = v, tink.state.Scheduler.direct);
+	public function new(list) {
+		this.list = list;
+	}
+
+	override function initialize() {
+		return list.bind(v -> nodes = v, tink.state.Scheduler.direct);
 	}
 
 	override function update(dt:Float) {
