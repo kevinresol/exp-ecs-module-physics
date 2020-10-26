@@ -1,12 +1,20 @@
 package exp.ecs.module.physics.component;
 
 class Collider implements Component {
-	public final hits:Array<Int>;
-	public final layers:Int; // bitmask
-	public final targets:Int; // bitmask
+	/**
+	 * This entity exists in these layers
+	**/
+	public final layers:Int;
+
+	/**
+	 * This entity can collide with entities in these target layers
+	**/
+	public final targets:Int;
+
+	public final hits:Array<Int> = [];
 
 	public function clone() {
-		return new Collider(hits.copy(), layers, targets);
+		return new Collider(layers, targets, hits.copy());
 	}
 
 	public inline function canCollideWith(other:Collider) {

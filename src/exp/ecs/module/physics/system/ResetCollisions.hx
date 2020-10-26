@@ -10,17 +10,7 @@ private typedef Components = {
  * Reset collision array
  */
 @:nullSafety(Off)
-class ResetCollisions extends System {
-	final list:NodeList<Components>;
-	var nodes:Array<Node<Components>>;
-
-	public function new(list) {
-		this.list = list;
-	}
-
-	override function initialize() {
-		return list.bind(v -> nodes = v, tink.state.Scheduler.direct);
-	}
+class ResetCollisions extends exp.ecs.system.SingleListSystem<Components> {
 
 	override function update(dt:Float) {
 		for (node in nodes)

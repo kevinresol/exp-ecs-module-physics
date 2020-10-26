@@ -16,19 +16,12 @@ private typedef Components = {
  * Move in 2D
  */
 @:nullSafety(Off)
-class DetectCollision2 extends System {
-	final list:NodeList<Components>;
-	var nodes:Array<Node<Components>>;
-
+class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 	final tree:QuadTree<Node<Components>>;
 
-	public function new(list, width, height, maxElements, maxDepth) {
-		this.list = list;
-		tree = new QuadTree(width, height, maxElements, maxDepth);
-	}
-
-	override function initialize() {
-		return list.bind(v -> nodes = v, tink.state.Scheduler.direct);
+	public function new(tracker, width, height, maxElements, maxDepth) {
+		super(tracker);
+		this.tree = new QuadTree(width, height, maxElements, maxDepth);
 	}
 
 	override function update(dt:Float) {
@@ -93,7 +86,7 @@ class DetectCollision2 extends System {
 
 	public static function getNodes(world:World) {
 		// @formatter:off
-		return NodeList.generate(world, Collider && @:field(transform) Transform2 && (Rectangle || Circle));
+		return NodeList.generate(world, Collider && @:component(transform) Transform2 && (Rectangle || Circle));
 		// @formatter:on
 	}
 }

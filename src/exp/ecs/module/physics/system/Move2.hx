@@ -5,29 +5,18 @@ import exp.ecs.module.physics.component.*;
 
 private typedef Components = {
 	final velocity:Velocity2;
-	final position:Position2;
+	final transform:Transform2;
 }
 
 /**
  * Move in 2D
  */
 @:nullSafety(Off)
-class Move2 extends System {
-	final list:NodeList<Components>;
-	var nodes:Array<Node<Components>>;
-
-	public function new(list) {
-		this.list = list;
-	}
-
-	override function initialize() {
-		return list.bind(v -> nodes = v, tink.state.Scheduler.direct);
-	}
-
+class Move2 extends exp.ecs.system.SingleListSystem<Components> {
 	override function update(dt:Float) {
 		for (node in nodes) {
 			final velocity = node.components.velocity;
-			final position = node.components.position;
+			final position = node.components.transform.position;
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
 		}
@@ -36,8 +25,8 @@ class Move2 extends System {
 	public static function getNodes(world:World) {
 		// @formatter:off
 		return NodeList.generate(world,
-			@:field(velocity) Velocity2 &&
-			@:field(position) Position2
+			@:component(velocity) Velocity2 &&
+			@:component(transform) Transform2
 		);
 		// @formatter:on
 	}
