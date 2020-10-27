@@ -22,9 +22,9 @@ class Move2 extends exp.ecs.system.SingleListSystem<Components> {
 		}
 	}
 
-	public static function getNodes(world:World) {
+	public static function getSpec() {
 		// @formatter:off
-		return NodeList.generate(world,
+		return NodeList.spec(
 			@:component(velocity) Velocity2 &&
 			@:component(transform) Transform2
 		);
