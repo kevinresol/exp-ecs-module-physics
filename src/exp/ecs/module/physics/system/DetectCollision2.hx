@@ -29,10 +29,10 @@ class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 
 		for (node in nodes) {
 			// insert to quadtree
-			final transform = node.components.transform;
+			final transform = node.data.transform;
 			final x = transform.global.tx;
 			final y = transform.global.ty;
-			final radius = node.components.circle.radius;
+			final radius = node.data.circle.radius;
 			tree.insert(node, x - radius, y - radius, x + radius, y + radius);
 		}
 
@@ -47,23 +47,23 @@ class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 
 			for (i in 0...length) {
 				final node1 = elements[i].data;
-				final collider1 = node1.components.collider;
-				final transform1 = node1.components.transform;
-				final circle1 = node1.components.circle;
+				final collider1 = node1.data.collider;
+				final transform1 = node1.data.transform;
+				final circle1 = node1.data.circle;
 				final x1 = transform1.global.tx;
 				final y1 = transform1.global.ty;
 
 				for (j in i + 1...length) {
 					final node2 = elements[j].data;
-					final circle2 = node2.components.circle;
+					final circle2 = node2.data.circle;
 
 					if (circle1 != null && circle2 != null) {
-						final collider2 = node2.components.collider;
+						final collider2 = node2.data.collider;
 						final canCollideWith2 = collider1.canCollideWith(collider2);
 						final canCollideWith1 = collider2.canCollideWith(collider1);
 
 						if (canCollideWith2 || canCollideWith1) {
-							final transform2 = node2.components.transform;
+							final transform2 = node2.data.transform;
 							final x2 = transform2.global.tx;
 							final y2 = transform2.global.ty;
 							final dx = x2 - x1;
@@ -74,7 +74,7 @@ class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 								if (canCollideWith2 && !collider1.hits.contains(node2.entity.id))
 									collider1.hits.push(node2.entity.id);
 
-								if (canCollideWith1 && !collider2.hits.contains(node2.entity.id))
+								if (canCollideWith1 && !collider2.hits.contains(node1.entity.id))
 									collider2.hits.push(node1.entity.id);
 							}
 						}

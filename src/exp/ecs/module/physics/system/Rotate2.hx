@@ -15,8 +15,8 @@ private typedef Components = {
 class Rotate2 extends exp.ecs.system.SingleListSystem<Components> {
 	override function update(dt:Float) {
 		for (node in nodes) {
-			final velocity = node.components.velocity;
-			node.components.transform.rotation += velocity.value * dt;
+			final velocity = node.data.velocity;
+			node.data.transform.rotation += velocity.value * dt;
 		}
 	}
 

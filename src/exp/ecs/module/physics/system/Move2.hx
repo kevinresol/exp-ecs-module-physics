@@ -15,8 +15,8 @@ private typedef Components = {
 class Move2 extends exp.ecs.system.SingleListSystem<Components> {
 	override function update(dt:Float) {
 		for (node in nodes) {
-			final velocity = node.components.velocity;
-			final position = node.components.transform.position;
+			final velocity = node.data.velocity;
+			final position = node.data.transform.position;
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
 		}

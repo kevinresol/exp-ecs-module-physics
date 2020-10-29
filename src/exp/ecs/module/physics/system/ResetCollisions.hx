@@ -13,7 +13,7 @@ private typedef Components = {
 class ResetCollisions extends exp.ecs.system.SingleListSystem<Components> {
 	override function update(dt:Float) {
 		for (node in nodes)
-			node.components.collider.hits.resize(0);
+			node.data.collider.hits.resize(0);
 	}
 
 	public static function getSpec() {

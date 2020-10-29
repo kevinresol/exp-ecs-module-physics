@@ -16,9 +16,9 @@ private typedef Components = {
 class ApplyForce2 extends exp.ecs.system.SingleListSystem<Components> {
 	override function update(dt:Float) {
 		for (node in nodes) {
-			final force = node.components.force;
-			final mass = node.components.mass.value;
-			final velocity = node.components.velocity;
+			final force = node.data.force;
+			final mass = node.data.mass.value;
+			final velocity = node.data.velocity;
 			velocity.x += force.x / mass * dt;
 			velocity.y += force.y / mass * dt;
 		}
