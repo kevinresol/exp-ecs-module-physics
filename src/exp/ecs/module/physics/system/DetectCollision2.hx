@@ -1,15 +1,13 @@
 package exp.ecs.module.physics.system;
 
 import exp.ecs.module.transform.component.*;
-import exp.ecs.module.geometry.component.*;
 import exp.ecs.module.physics.component.*;
 import exp.spatial.QuadTree;
 
 private typedef Components = {
 	final collider:Collider;
 	final transform:Transform2;
-	final rectangle:Rectangle;
-	final circle:Circle;
+	final circle:HitCircle;
 }
 
 /**
@@ -86,7 +84,7 @@ class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 
 	public static function getSpec() {
 		// @formatter:off
-		return NodeList.spec(Collider && @:component(transform) Transform2 && (Rectangle || Circle));
+		return NodeList.spec(Collider && @:component(transform) Transform2 && @:component(circle) HitCircle);
 		// @formatter:on
 	}
 }
