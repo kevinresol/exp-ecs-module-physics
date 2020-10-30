@@ -14,6 +14,10 @@ private typedef Components = {
  */
 @:nullSafety(Off)
 class ApplyForce2 extends exp.ecs.system.SingleListSystem<Components> {
+	public function new() {
+		super(NodeList.spec(Mass && @:component(force) Force2 && @:component(velocity) Velocity2));
+	}
+
 	override function update(dt:Float) {
 		for (node in nodes) {
 			final force = node.data.force;
@@ -22,15 +26,5 @@ class ApplyForce2 extends exp.ecs.system.SingleListSystem<Components> {
 			velocity.x += force.x / mass * dt;
 			velocity.y += force.y / mass * dt;
 		}
-	}
-
-	public static function getSpec() {
-		// @formatter:off
-		return NodeList.spec(
-			Mass &&
-			@:component(force) Force2 &&
-			@:component(velocity) Velocity2
-		);
-		// @formatter:on
 	}
 }

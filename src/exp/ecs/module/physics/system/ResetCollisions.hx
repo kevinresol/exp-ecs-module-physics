@@ -11,12 +11,12 @@ private typedef Components = {
  */
 @:nullSafety(Off)
 class ResetCollisions extends exp.ecs.system.SingleListSystem<Components> {
+	public function new() {
+		super(NodeList.spec(Collider));
+	}
+
 	override function update(dt:Float) {
 		for (node in nodes)
 			node.data.collider.hits.resize(0);
-	}
-
-	public static function getSpec() {
-		return NodeList.spec(Collider);
 	}
 }

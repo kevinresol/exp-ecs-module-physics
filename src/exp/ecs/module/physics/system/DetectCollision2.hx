@@ -17,8 +17,8 @@ private typedef Components = {
 class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 	final tree:QuadTree<Node<Components>>;
 
-	public function new(tracker, width, height, maxElements, maxDepth) {
-		super(tracker);
+	public function new(width, height, maxElements, maxDepth) {
+		super(NodeList.spec(Collider && @:component(transform) Transform2 && @:component(circle) HitCircle));
 		this.tree = new QuadTree(width, height, maxElements, maxDepth);
 	}
 
@@ -80,11 +80,5 @@ class DetectCollision2 extends exp.ecs.system.SingleListSystem<Components> {
 				}
 			}
 		}
-	}
-
-	public static function getSpec() {
-		// @formatter:off
-		return NodeList.spec(Collider && @:component(transform) Transform2 && @:component(circle) HitCircle);
-		// @formatter:on
 	}
 }

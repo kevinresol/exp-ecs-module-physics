@@ -13,6 +13,10 @@ private typedef Components = {
  */
 @:nullSafety(Off)
 class Move2 extends exp.ecs.system.SingleListSystem<Components> {
+	public function new() {
+		super(NodeList.spec(@:component(velocity) Velocity2 && @:component(transform) Transform2));
+	}
+
 	override function update(dt:Float) {
 		for (node in nodes) {
 			final velocity = node.data.velocity;
@@ -20,14 +24,5 @@ class Move2 extends exp.ecs.system.SingleListSystem<Components> {
 			position.x += velocity.x * dt;
 			position.y += velocity.y * dt;
 		}
-	}
-
-	public static function getSpec() {
-		// @formatter:off
-		return NodeList.spec(
-			@:component(velocity) Velocity2 &&
-			@:component(transform) Transform2
-		);
-		// @formatter:on
 	}
 }
