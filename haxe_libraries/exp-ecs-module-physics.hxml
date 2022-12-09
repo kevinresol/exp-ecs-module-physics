@@ -1,0 +1,5 @@
+-cp src
+-lib exp-ecs
+-lib exp-ecs-module-transform
+-lib exp-ecs-module-geometry
+-lib exp-spatial
